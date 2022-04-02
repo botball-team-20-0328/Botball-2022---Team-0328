@@ -48,10 +48,10 @@ void line_square_up(int speed);
 int main()
 {
     arm_all();
-    while(1) {
+    /*while(1) {
         printf("VAL: %d\n", get_create_rfcliff_amt());
         msleep(500);
-    }
+    }*/
 	//create_connect();
     //create_full();
     printf("BATTERY: %d\n", get_create_battery_capacity());
@@ -63,9 +63,9 @@ int main()
 
     
     create_drive_direct(-100,-100);
-    msleep(1000);
+    msleep(800);
     roomba_drive_straight(178,200);
-    roomba_turn_in_place(125,100);
+    roomba_turn_in_place(115,100);
     roomba_drive_straight(55,200);
     //drop claw, pick up rings, drive to post
     lift(LIFT_ONETWO,1300);
@@ -75,7 +75,7 @@ int main()
     //roomba_drive_straight(100,-200);
     create_drive_direct(-100,-100);
     msleep(600);
-    roomba_turn_in_place(-125,100);
+    roomba_turn_in_place(-115,100);
     
     //roomba_drive_straight(178,-300);
     //roomba_drive_straight(60,-150);
@@ -89,17 +89,17 @@ int main()
     line_square_up(100);
     
     //out of base
-    roomba_drive_straight(500,300);
+    roomba_drive_straight(589,300);
     create_drive_direct(75,75);
-    while(get_create_rfcliff_amt()>CREATE_LIGHT_THRESH) {
+    while(get_create_rcliff_amt()>CREATE_LIGHT_THRESH) {
         msleep(16);
-        //IF RIGHT CLIFF HITS THRESH, COUNTER
     }
     create_stop();
     //back up from line
-    
 	create_drive_direct(-100,-100);
-    msleep(500);
+    msleep(1000);
+
+    //turn towards pvc
     roomba_turn_in_place(-51,100);
     create_drive_direct(-50,-50);
     msleep(1400);
@@ -132,7 +132,7 @@ int main()
     
     ///////////////AGAAAAIN
     roomba_drive_straight(178,200);
-    roomba_turn_in_place(125,100);
+    roomba_turn_in_place(115,100);
     roomba_drive_straight(55,200);
     //drop claw, pick up rings, drive to post
     lift(LIFT_FOUR,1300);
@@ -142,7 +142,7 @@ int main()
     //roomba_drive_straight(100,-200);
     create_drive_direct(-100,-100);
     msleep(600);
-    roomba_turn_in_place(-125,100);
+    roomba_turn_in_place(-115,100);
     
     //roomba_drive_straight(178,-300);
     //roomba_drive_straight(60,-150);
@@ -156,16 +156,17 @@ int main()
     line_square_up(100);
     
     //out of base
-    roomba_drive_straight(500,300);
+    roomba_drive_straight(589,300);
     create_drive_direct(75,75);
-    while(get_create_rfcliff_amt()>CREATE_LIGHT_THRESH) {
+    while(get_create_rcliff_amt()>CREATE_LIGHT_THRESH) {
         msleep(16);
     }
     create_stop();
     //back up from line
-    
 	create_drive_direct(-100,-100);
-    msleep(500);
+    msleep(1000);
+
+    //turn towards pvc
     roomba_turn_in_place(-51,100);
     create_drive_direct(-50,-50);
     msleep(1400);
@@ -195,7 +196,7 @@ int main()
     
     ///////////////AGAAAAIN
     roomba_drive_straight(178,200);
-    roomba_turn_in_place(125,100);
+    roomba_turn_in_place(115,100);
     roomba_drive_straight(55,200);
     //drop claw, pick up rings, drive to post
     lift(LIFT_FIVE,1300);
@@ -205,7 +206,7 @@ int main()
     //roomba_drive_straight(100,-200);
     create_drive_direct(-100,-100);
     msleep(600);
-    roomba_turn_in_place(-125,100);
+    roomba_turn_in_place(-115,100);
     
     //roomba_drive_straight(178,-300);
     //roomba_drive_straight(60,-150);
@@ -219,16 +220,17 @@ int main()
     line_square_up(100);
     
     //out of base
-    roomba_drive_straight(500,300);
+    roomba_drive_straight(589,300);
     create_drive_direct(75,75);
-    while(get_create_rfcliff_amt()>CREATE_LIGHT_THRESH) {
+    while(get_create_rcliff_amt()>CREATE_LIGHT_THRESH) {
         msleep(16);
     }
     create_stop();
     //back up from line
-    
 	create_drive_direct(-100,-100);
-    msleep(500);
+    msleep(1000);
+
+    //turn towards pvc
     roomba_turn_in_place(-51,100);
     create_drive_direct(-50,-50);
     msleep(1400);
@@ -285,7 +287,6 @@ int main()
     */
     
     //create_drive_direct(-400,-400);
-    msleep(2000);
     
     return 0;
 }
