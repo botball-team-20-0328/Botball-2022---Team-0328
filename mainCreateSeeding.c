@@ -13,12 +13,12 @@
 #define LIFT_HIGH 0
 
 #define LIFT_TOP -100
-#define LIFT_ONETWO -6400
-#define LIFT_THREE -7740
-#define LIFT_FOUR -8970
+#define LIFT_ONETWO -6200
+#define LIFT_THREE -7620
+#define LIFT_FOUR -8870
 #define LIFT_FIVE -9900
 
-#define LIFT_DROP_H -3000
+#define LIFT_DROP_H -2000
 #define MOTOR_MARGIN 10
 
 #define LCLAW_THRESH 310
@@ -28,7 +28,7 @@
 #define CLAW_CLOSED 770
 
 #define CLAW_ONETWO 710
-#define CLAW_THREE 660
+#define CLAW_THREE 670
 #define CLAW_FOUR 630
 #define CLAW_FIVE 600
 
@@ -48,34 +48,34 @@ void line_square_up(int speed);
 int main()
 {
     arm_all();
-	
+    while(1) {
+        printf("VAL: %d\n", get_create_rfcliff_amt());
+        msleep(500);
+    }
+	//create_connect();
+    //create_full();
     printf("BATTERY: %d\n", get_create_battery_capacity());
     //roomba_drive_straight(int distance, int speed)
     //speed determines direction, distance always positive
     //roomba_turn_in_place(int degrees, int speed)
     //degrees determines direction (CCW= +), speed always positive
     //roomba_turn_with_radius(int angle, int radius, int speed)
-    
-    //line_square_up(100);
-    //msleep(5000);
-    
-    
-    //roomba_drive_straight(50,-200);
+
     
     create_drive_direct(-100,-100);
     msleep(1000);
     roomba_drive_straight(178,200);
-    roomba_turn_in_place(118,100);
+    roomba_turn_in_place(125,100);
     roomba_drive_straight(55,200);
     //drop claw, pick up rings, drive to post
-    lift(LIFT_ONETWO,1000);
+    lift(LIFT_ONETWO,1300);
     claw_pos(CLAW_ONETWO,1000);
-    lift(LIFT_TOP,1200);
+    lift(LIFT_TOP,1300);
     
     //roomba_drive_straight(100,-200);
     create_drive_direct(-100,-100);
     msleep(600);
-    roomba_turn_in_place(-118,100);
+    roomba_turn_in_place(-125,100);
     
     //roomba_drive_straight(178,-300);
     //roomba_drive_straight(60,-150);
@@ -89,9 +89,76 @@ int main()
     line_square_up(100);
     
     //out of base
-    roomba_drive_straight(550,300);
-    create_drive_direct(100,100);
-    while(get_create_rfcliff_amt()<CREATE_LIGHT_THRESH) {
+    roomba_drive_straight(500,300);
+    create_drive_direct(75,75);
+    while(get_create_rfcliff_amt()>CREATE_LIGHT_THRESH) {
+        msleep(16);
+        //IF RIGHT CLIFF HITS THRESH, COUNTER
+    }
+    create_stop();
+    //back up from line
+    
+	create_drive_direct(-100,-100);
+    msleep(500);
+    roomba_turn_in_place(-51,100);
+    create_drive_direct(-50,-50);
+    msleep(1400);
+    create_stop();
+    msleep(500);
+    //over rod, drop rings
+    lift(LIFT_DROP_H,1200);
+    
+    claw_pos(CLAW_OPEN,200);
+    create_drive_direct(-100,-100);
+    msleep(500);
+    roomba_turn_in_place(265,100);
+    
+    //turned around, drive back to base
+    roomba_drive_straight(200,200);
+    line_square_up(100);
+    roomba_drive_straight(275,200);
+    roomba_turn_in_place(-90,100);
+    create_drive_direct(-100,-100);
+    msleep(2000);
+    //squared up back in base, repeat same process
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    ///////////////AGAAAAIN
+    roomba_drive_straight(178,200);
+    roomba_turn_in_place(125,100);
+    roomba_drive_straight(55,200);
+    //drop claw, pick up rings, drive to post
+    lift(LIFT_FOUR,1300);
+    claw_pos(CLAW_FOUR,1000);
+    lift(LIFT_TOP,1300);
+    
+    //roomba_drive_straight(100,-200);
+    create_drive_direct(-100,-100);
+    msleep(600);
+    roomba_turn_in_place(-125,100);
+    
+    //roomba_drive_straight(178,-300);
+    //roomba_drive_straight(60,-150);
+    create_drive_direct(-200,-200);
+    msleep(800);
+    create_drive_direct(-100,-100);
+    msleep(1500);
+    //squared up, drive
+    roomba_drive_straight(50,200);
+    roomba_turn_in_place(-90,100);
+    line_square_up(100);
+    
+    //out of base
+    roomba_drive_straight(500,300);
+    create_drive_direct(75,75);
+    while(get_create_rfcliff_amt()>CREATE_LIGHT_THRESH) {
         msleep(16);
     }
     create_stop();
@@ -103,16 +170,19 @@ int main()
     create_drive_direct(-50,-50);
     msleep(1400);
     create_stop();
-    
+    msleep(500);
     //over rod, drop rings
     lift(LIFT_DROP_H,1200);
+    
     claw_pos(CLAW_OPEN,200);
     create_drive_direct(-100,-100);
     msleep(500);
-    roomba_turn_in_place(231,100);
-    roomba_drive_straight(400,300);
+    roomba_turn_in_place(265,100);
+    
+    //turned around, drive back to base
+    roomba_drive_straight(200,200);
     line_square_up(100);
-    roomba_drive_straight(100,200);
+    roomba_drive_straight(275,200);
     roomba_turn_in_place(-90,100);
     create_drive_direct(-100,-100);
     msleep(2000);
@@ -121,6 +191,65 @@ int main()
     
     
     
+    
+    
+    ///////////////AGAAAAIN
+    roomba_drive_straight(178,200);
+    roomba_turn_in_place(125,100);
+    roomba_drive_straight(55,200);
+    //drop claw, pick up rings, drive to post
+    lift(LIFT_FIVE,1300);
+    claw_pos(CLAW_FIVE,1000);
+    lift(LIFT_TOP,1300);
+    
+    //roomba_drive_straight(100,-200);
+    create_drive_direct(-100,-100);
+    msleep(600);
+    roomba_turn_in_place(-125,100);
+    
+    //roomba_drive_straight(178,-300);
+    //roomba_drive_straight(60,-150);
+    create_drive_direct(-200,-200);
+    msleep(800);
+    create_drive_direct(-100,-100);
+    msleep(1500);
+    //squared up, drive
+    roomba_drive_straight(50,200);
+    roomba_turn_in_place(-90,100);
+    line_square_up(100);
+    
+    //out of base
+    roomba_drive_straight(500,300);
+    create_drive_direct(75,75);
+    while(get_create_rfcliff_amt()>CREATE_LIGHT_THRESH) {
+        msleep(16);
+    }
+    create_stop();
+    //back up from line
+    
+	create_drive_direct(-100,-100);
+    msleep(500);
+    roomba_turn_in_place(-51,100);
+    create_drive_direct(-50,-50);
+    msleep(1400);
+    create_stop();
+    msleep(500);
+    //over rod, drop rings
+    lift(LIFT_DROP_H,1200);
+    
+    claw_pos(CLAW_OPEN,200);
+    create_drive_direct(-100,-100);
+    msleep(500);
+    roomba_turn_in_place(265,100);
+    
+    //turned around, drive back to base
+    roomba_drive_straight(200,200);
+    line_square_up(100);
+    roomba_drive_straight(275,200);
+    roomba_turn_in_place(-90,100);
+    create_drive_direct(-100,-100);
+    msleep(2000);
+    //squared up back in base, repeat same process
     
     
     
