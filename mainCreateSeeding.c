@@ -5,7 +5,6 @@
 #define LCLAW_PORT 2
 #define RCLAW_PORT 3
 
-#define LIGHT_START_PORT 0
 #define LIFT_SENSOR_PORT 9
 
 #define LIFT_LOW -11000
@@ -33,8 +32,9 @@
 #define CLAW_FIVE 600
 
 #define CREATE_LIGHT_THRESH 2000
+#define CREATE_360_CONST 5350
 
-
+#define LIGHT_START_PORT 5
 
 double bias;
 
@@ -44,6 +44,7 @@ void lift(int position, int spd);
 void resetLift();
 void claw_pos(int position, int time);
 void line_square_up(int speed);
+void create_turn(int degree, int speed);
 
 int main()
 {
@@ -55,17 +56,24 @@ int main()
 	//create_connect();
     //create_full();
     printf("BATTERY: %d\n", get_create_battery_capacity());
+
     //roomba_drive_straight(int distance, int speed)
     //speed determines direction, distance always positive
-    //roomba_turn_in_place(int degrees, int speed)
+    //create_turn(int degrees, int speed)
     //degrees determines direction (CCW= +), speed always positive
     //roomba_turn_with_radius(int angle, int radius, int speed)
+    //create_turn(int angle, int speed)
 
-    
+    ///TOURNAMENT FUNCTIONS
+    wait_for_light(LIGHT_START_PORT);
+    shut_down_in(119);
+    msleep(4000);
+
+
     create_drive_direct(-100,-100);
-    msleep(800);
+    claw_pos(CLAW_OPEN,500);
     roomba_drive_straight(178,200);
-    roomba_turn_in_place(115,100);
+    create_turn(128,100);
     roomba_drive_straight(55,200);
     //drop claw, pick up rings, drive to post
     lift(LIFT_ONETWO,1300);
@@ -75,24 +83,24 @@ int main()
     //roomba_drive_straight(100,-200);
     create_drive_direct(-100,-100);
     msleep(600);
-    roomba_turn_in_place(-115,100);
+    create_turn(-128,100);
     
     //roomba_drive_straight(178,-300);
     //roomba_drive_straight(60,-150);
     create_drive_direct(-200,-200);
     msleep(800);
     create_drive_direct(-100,-100);
-    msleep(1500);
+    msleep(1000);
     //squared up, drive
     roomba_drive_straight(50,200);
-    roomba_turn_in_place(-90,100);
+    create_turn(-90,100);
     line_square_up(100);
     
     //out of base
     roomba_drive_straight(589,300);
     create_drive_direct(75,75);
     while(get_create_rcliff_amt()>CREATE_LIGHT_THRESH) {
-        msleep(16);
+        msleep(10);
     }
     create_stop();
     //back up from line
@@ -100,9 +108,9 @@ int main()
     msleep(1000);
 
     //turn towards pvc
-    roomba_turn_in_place(-51,100);
+    create_turn(-64,100);
     create_drive_direct(-50,-50);
-    msleep(1400);
+    msleep(1000);
     create_stop();
     msleep(500);
     //over rod, drop rings
@@ -111,13 +119,13 @@ int main()
     claw_pos(CLAW_OPEN,200);
     create_drive_direct(-100,-100);
     msleep(500);
-    roomba_turn_in_place(265,100);
+    create_turn(265,100);
     
     //turned around, drive back to base
     roomba_drive_straight(200,200);
     line_square_up(100);
     roomba_drive_straight(275,200);
-    roomba_turn_in_place(-90,100);
+    create_turn(-90,100);
     create_drive_direct(-100,-100);
     msleep(2000);
     //squared up back in base, repeat same process
@@ -132,7 +140,7 @@ int main()
     
     ///////////////AGAAAAIN
     roomba_drive_straight(178,200);
-    roomba_turn_in_place(115,100);
+    create_turn(128,100);
     roomba_drive_straight(55,200);
     //drop claw, pick up rings, drive to post
     lift(LIFT_FOUR,1300);
@@ -142,24 +150,24 @@ int main()
     //roomba_drive_straight(100,-200);
     create_drive_direct(-100,-100);
     msleep(600);
-    roomba_turn_in_place(-115,100);
+    create_turn(-128,100);
     
     //roomba_drive_straight(178,-300);
     //roomba_drive_straight(60,-150);
     create_drive_direct(-200,-200);
     msleep(800);
     create_drive_direct(-100,-100);
-    msleep(1500);
+    msleep(1000);
     //squared up, drive
     roomba_drive_straight(50,200);
-    roomba_turn_in_place(-90,100);
+    create_turn(-90,100);
     line_square_up(100);
     
     //out of base
     roomba_drive_straight(589,300);
     create_drive_direct(75,75);
     while(get_create_rcliff_amt()>CREATE_LIGHT_THRESH) {
-        msleep(16);
+        msleep(10);
     }
     create_stop();
     //back up from line
@@ -167,9 +175,9 @@ int main()
     msleep(1000);
 
     //turn towards pvc
-    roomba_turn_in_place(-51,100);
+    create_turn(-63,100);
     create_drive_direct(-50,-50);
-    msleep(1400);
+    msleep(1100);
     create_stop();
     msleep(500);
     //over rod, drop rings
@@ -178,13 +186,13 @@ int main()
     claw_pos(CLAW_OPEN,200);
     create_drive_direct(-100,-100);
     msleep(500);
-    roomba_turn_in_place(265,100);
+    create_turn(265,100);
     
     //turned around, drive back to base
     roomba_drive_straight(200,200);
     line_square_up(100);
     roomba_drive_straight(275,200);
-    roomba_turn_in_place(-90,100);
+    create_turn(-90,100);
     create_drive_direct(-100,-100);
     msleep(2000);
     //squared up back in base, repeat same process
@@ -196,7 +204,7 @@ int main()
     
     ///////////////AGAAAAIN
     roomba_drive_straight(178,200);
-    roomba_turn_in_place(115,100);
+    create_turn(128,100);
     roomba_drive_straight(55,200);
     //drop claw, pick up rings, drive to post
     lift(LIFT_FIVE,1300);
@@ -206,24 +214,24 @@ int main()
     //roomba_drive_straight(100,-200);
     create_drive_direct(-100,-100);
     msleep(600);
-    roomba_turn_in_place(-115,100);
+    create_turn(-128,100);
     
     //roomba_drive_straight(178,-300);
     //roomba_drive_straight(60,-150);
     create_drive_direct(-200,-200);
     msleep(800);
     create_drive_direct(-100,-100);
-    msleep(1500);
+    msleep(1000);
     //squared up, drive
     roomba_drive_straight(50,200);
-    roomba_turn_in_place(-90,100);
+    create_turn(-90,100);
     line_square_up(100);
     
     //out of base
     roomba_drive_straight(589,300);
     create_drive_direct(75,75);
     while(get_create_rcliff_amt()>CREATE_LIGHT_THRESH) {
-        msleep(16);
+        msleep(10);
     }
     create_stop();
     //back up from line
@@ -231,62 +239,15 @@ int main()
     msleep(1000);
 
     //turn towards pvc
-    roomba_turn_in_place(-51,100);
+    create_turn(-65,100);
     create_drive_direct(-50,-50);
-    msleep(1400);
+    msleep(1100);
     create_stop();
     msleep(500);
     //over rod, drop rings
     lift(LIFT_DROP_H,1200);
     
     claw_pos(CLAW_OPEN,200);
-    create_drive_direct(-100,-100);
-    msleep(500);
-    roomba_turn_in_place(265,100);
-    
-    //turned around, drive back to base
-    roomba_drive_straight(200,200);
-    line_square_up(100);
-    roomba_drive_straight(275,200);
-    roomba_turn_in_place(-90,100);
-    create_drive_direct(-100,-100);
-    msleep(2000);
-    //squared up back in base, repeat same process
-    
-    
-    
-    
-    
-    /*create_drive_direct(-100,-100);
-    msleep(250);
-    create_drive_direct(300,300);
-    msleep(400);
-    create_drive_direct(-250,250);
-    msleep(600);
-	*/
-    
-    /*lift(LIFT_ONETWO,1000);
-    claw_pos(CLAW_ONETWO,1000);
-    lift(LIFT_TOP,1200);
-    claw_pos(CLAW_OPEN,500);
-    
-    lift(LIFT_THREE,1000);
-    claw_pos(CLAW_THREE,1000);
-    lift(LIFT_TOP,1200);
-    claw_pos(CLAW_OPEN,500);
-    
-    lift(LIFT_FOUR,1000);
-    claw_pos(CLAW_FOUR,1000);
-    lift(LIFT_TOP,1200);
-    claw_pos(CLAW_OPEN,500);
-    
-    lift(LIFT_FIVE,1000);
-    claw_pos(CLAW_FIVE,1000);
-    lift(LIFT_TOP,1200);
-    claw_pos(CLAW_OPEN,500);
-    */
-    
-    //create_drive_direct(-400,-400);
     
     return 0;
 }
@@ -295,7 +256,7 @@ void arm_all()
 {
     create_connect();
     create_full();
-    claw_pos(CLAW_MID,1);
+    claw_pos(CLAW_THREE,1);
     enable_servos();
     resetLift();
     //cg();
@@ -329,7 +290,7 @@ void lift(int position, int spd) {
         msleep(10);
     }
     mav(LIFT_PORT,0);
-    msleep(500);
+    msleep(200);
 
     /*int beginPos = get_motor_position_counter(port);
     int increment = beginPos<position?1:-1;
@@ -343,7 +304,7 @@ void lift(int position, int spd) {
 void resetLift() {
     mav(LIFT_PORT,750);
     while(digital(LIFT_SENSOR_PORT)==0) {
-        msleep(50);
+        msleep(10);
     }
     mav(LIFT_PORT,0);
     clear_motor_position_counter(LIFT_PORT);
@@ -422,5 +383,18 @@ void line_square_up(int speed) {
             create_drive_direct(speed,speed);
         }
     }
+    create_stop();
+}
+
+void create_turn(int degree, int speed) {
+	speed = 100;
+    if(degree>=0) {
+        create_drive_direct(-speed,speed);
+    } else {
+        degree=-degree;
+        create_drive_direct(speed,-speed);
+    }
+    float stuff = (CREATE_360_CONST / (360.0/degree)) * 100.0/speed;
+    msleep(stuff);
     create_stop();
 }
