@@ -21,7 +21,7 @@
 #define CLAW_AIRLOCK_CLOSED 445
 
 #define ARM_UP 2047
-#define ARM_PIPE_BLOCK 1225
+#define ARM_PIPE_BLOCK 1180
 #define ARM_DOWN 800
 #define ARM_MIN 
 #define ARM_AIRLOCK 1697
@@ -355,16 +355,16 @@ void to_centerline(){
     set_servo_position(claw_servo, CLAW_OPEN);
     //turn and grab block
     
-    tank_drive_distance(300, 1800, default_speed);
+    tank_drive_distance(300, 1700, default_speed);
     printf("B\n");
     slow_servo(arm_servo, ARM_DOWN, 500);
     msleep(300);
-    drive_distance(560, default_speed);
+    drive_distance(590, default_speed);
     set_servo_position(claw_servo, CLAW_BLOCK_CLOSED);
     msleep(400);
     drive_distance(-1000, default_speed);
     slow_servo(arm_servo, 1500, 1000);
-    tank_drive_distance(-370, 370, default_speed);
+    tank_drive_distance(-410, 410, default_speed);
     line_square_up(default_speed);
 }
 //from centerline
@@ -377,8 +377,8 @@ void place_red_block_1(){
 
     //go up to airlock, turn and release block
     drive_distance(-2200, default_speed);
-    tank_drive_distance(1300, -1300, default_speed/2);
-    drive_distance(1400, default_speed);
+    tank_drive_distance(1220, -1220, default_speed/2);
+    drive_distance(1630, default_speed);
     slow_servo(claw_servo, CLAW_OPEN, 500);
     tank_drive_distance(25, -25, default_speed/2);
     ao();
@@ -389,7 +389,7 @@ void place_red_block_1(){
 void get_red_block_2(){
     slow_servo(arm_servo, ARM_PIPE_BLOCK, 500);
     line_square_up(default_speed);
-    drive_distance(3300, default_speed);
+    drive_distance(3150, default_speed);
     set_servo_position(claw_servo, CLAW_BLOCK_CLOSED);
     msleep(300);
 }
@@ -401,7 +401,7 @@ void place_red_block_2(){
     drive_distance(-2200, default_speed);
     slow_servo(arm_servo, ARM_UP, 800);
     tank_drive_distance(1300, -1300, default_speed/2);
-    drive_distance(900, default_speed);
+    drive_distance(1200, default_speed);
     slow_servo(claw_servo, 900, 500);
     /*tank_drive_distance(25, -25, default_speed/2);
     ao();
