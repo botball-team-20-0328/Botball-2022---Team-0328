@@ -22,7 +22,7 @@
 
 #define ARM_UP 2047
 #define ARM_PIPE_BLOCK 1225
-#define ARM_DOWN 1111
+#define ARM_DOWN 800
 #define ARM_MIN 
 #define ARM_AIRLOCK 1697
 //comment this out to turn off display_printf logging for some things
@@ -389,7 +389,7 @@ void place_red_block_1(){
 void get_red_block_2(){
     slow_servo(arm_servo, ARM_PIPE_BLOCK, 500);
     line_square_up(default_speed);
-    drive_distance(3000, default_speed);
+    drive_distance(3300, default_speed);
     set_servo_position(claw_servo, CLAW_BLOCK_CLOSED);
     msleep(300);
 }
@@ -400,7 +400,7 @@ void place_red_block_2(){
     //back to airlock
     drive_distance(-2200, default_speed);
     slow_servo(arm_servo, ARM_UP, 800);
-    tank_drive_distance(1450, -1450, default_speed/2);
+    tank_drive_distance(1300, -1300, default_speed/2);
     drive_distance(900, default_speed);
     slow_servo(claw_servo, 900, 500);
     /*tank_drive_distance(25, -25, default_speed/2);
