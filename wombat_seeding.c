@@ -336,13 +336,18 @@ void rip_dex() {
 }
 
 const int default_speed = 1200;
+
+void get_the_f_out(){
+	drive_distance(-4500, 1500);
+    slow_servo(arm_servo, ARM_DOWN, 1000);
+    msleep(15000);
+}
 //gets red block in starting box && goes to centerline
 void to_centerline(){
     //exit starting box at hyperspeed
     /*line_square_up(-default_speed);
     drive_distance(-1200, default_speed);*/
-    drive_distance(-4000, 1500);
-    msleep(15000);
+
     line_square_up(default_speed);
     drive_distance(-800, default_speed);
     printf("A\n");
@@ -371,13 +376,13 @@ void place_red_block_1(){
 
     //go up to airlock, turn and release block
     drive_distance(-2200, default_speed);
-    tank_drive_distance(1100, -1100, default_speed/2);
-    drive_distance(1150, default_speed);
+    tank_drive_distance(1300, -1300, default_speed/2);
+    drive_distance(1400, default_speed);
     slow_servo(claw_servo, CLAW_OPEN, 500);
     tank_drive_distance(25, -25, default_speed/2);
     ao();
-    drive_distance(-1150, default_speed);
-    tank_drive_distance(-1100, 1100, default_speed/2);
+    drive_distance(-1400, default_speed);
+    tank_drive_distance(-1370, 1370, default_speed/2);
 }
 //assumes arm is up
 void get_red_block_2(){
@@ -395,7 +400,7 @@ void place_red_block_2(){
     drive_distance(-2200, default_speed);
     slow_servo(arm_servo, ARM_UP, 800);
     tank_drive_distance(1320, -1320, default_speed/2);
-    drive_distance(750, default_speed);
+    drive_distance(1300, default_speed);
     slow_servo(claw_servo, 900, 500);
     /*tank_drive_distance(25, -25, default_speed/2);
     ao();
@@ -445,6 +450,7 @@ void get_ready(){
 int main()
 {
     get_ready();
+    get_the_f_out();
     to_centerline();
     place_red_block_1();
 	get_red_block_2();
