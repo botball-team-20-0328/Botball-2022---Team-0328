@@ -1,6 +1,7 @@
 //wombat seeding
 //gets 125 +- 4 points consistently
 //10% chance of 30 +-4
+
 #include <kipr/wombat.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -399,8 +400,8 @@ void place_red_block_2(){
     //back to airlock
     drive_distance(-2200, default_speed);
     slow_servo(arm_servo, ARM_UP, 800);
-    tank_drive_distance(1320, -1320, default_speed/2);
-    drive_distance(1300, default_speed);
+    tank_drive_distance(1450, -1450, default_speed/2);
+    drive_distance(900, default_speed);
     slow_servo(claw_servo, 900, 500);
     /*tank_drive_distance(25, -25, default_speed/2);
     ao();
